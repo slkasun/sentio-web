@@ -5,6 +5,8 @@
 (function () {
   "use strict";
 
+  var RECAPTCHA_SITE_KEY = "6LcWsJAsAAAAAEDbhLEDGfbNHrCn_fQNSNXaOdDN";
+
   const form = document.querySelector(".contact-form");
   if (!form) return;
 
@@ -72,38 +74,55 @@
 
     setLoading(true);
 
-    const data = new FormData(form);
+    // Execute reCAPTCHA v3 and then submit
+    grecaptcha.ready(function () {
+      grecaptcha
+        .execute(RECAPTCHA_SITE_KEY, { action: "contact" })
+        .then(function (token) {
+          form.querySelector("#recaptchaResponse").value = token;
 
-    fetch(form.action, {
-      method: "POST",
-      body: data,
-      headers: { Accept: "application/json" },
-    })
-      .then(function (response) {
-        if (response.ok) {
-          showStatus(
-            "Thank you! Your message has been sent. We'll get back to you soon.",
-            "success"
-          );
-          form.reset();
-        } else {
-          return response.json().then(function (json) {
-            var errorMsg =
-              json.errors
-                ? json.errors.map(function (err) { return err.message; }).join(", ")
-                : "Something went wrong. Please try again.";
-            showStatus(errorMsg, "error");
-          });
-        }
-      })
-      .catch(function () {
-        showStatus(
-          "Network error. Please check your connection and try again.",
-          "error"
-        );
-      })
-      .finally(function () {
-        setLoading(false);
-      });
+          var data = new FormData(form);
+
+          fetch(form.action, {
+            method: "POST",
+            body: data,
+            headers: { Accept: "application/json" },
+          })
+            .then(function (response) {
+              if (response.ok) {
+                showStatus(
+                  "Thank you! Your message has been sent. We'll get back to you soon.",
+                  "success"
+                );
+                form.reset();
+              } else {
+                return response.json().then(function (json) {
+                  var errorMsg =
+                    json.errors
+                      ? json.errors
+                          .map(function (err) {
+                            return err.message;
+                          })
+                          .join(", ")
+                      : "Something went wrong. Please try again.";
+                  showStatus(errorMsg, "error");
+                });
+              }
+            })
+            .catch(function () {
+              showStatus(
+                "Network error. Please check your connection and try again.",
+                "error"
+              );
+            })
+            .finally(function () {
+              setLoading(false);
+            });
+        })
+        .catch(function () {
+          showStatus("reCAPTCHA verification failed. Please try again.", "error");
+          setLoading(false);
+        });
+    });
   });
 })();
