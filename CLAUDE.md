@@ -18,6 +18,12 @@ Static corporate website for **sentioLogic** — a software engineering company.
 - **Formspree** (`https://formspree.io/f/xreaallb`) — Contact form backend
 - **Google reCAPTCHA v3** (site key: `6LcWsJAsAAAAAEDbhLEDGfbNHrCn_fQNSNXaOdDN`) — Spam protection on contact form
 
+## Hosting
+
+- Live at **https://sentiologic.site**, served via **Cloudflare**, deployed from the `main` branch of https://github.com/slkasun/sentio-web.git
+- No AWS or GitHub Pages deployment — pushing to `main` is the only deploy step
+- `robots.txt` and `sitemap.xml` at the root support Google indexing; update `<lastmod>` in `sitemap.xml` when content changes
+
 ## Development
 
 No build step. Open `index.html` in a browser or serve with any static server:
