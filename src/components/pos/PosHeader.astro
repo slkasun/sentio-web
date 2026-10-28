@@ -5,7 +5,7 @@
 import DemoLink from "./DemoLink.astro";
 
 interface Props {
-  current: "overview" | "terminal" | "admin";
+  current?: "overview" | "terminal" | "admin";
 }
 
 const { current } = Astro.props;

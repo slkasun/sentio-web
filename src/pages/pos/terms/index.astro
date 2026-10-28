@@ -1,0 +1,28 @@
+---
+import PosLayout from "../../../layouts/PosLayout.astro";
+import LegalDocument from "../../../components/pos/LegalDocument.astro";
+import { compiledContent, frontmatter, getHeadings } from "../../../content/legal/terms.md";
+import { breadcrumbs } from "../../../data/schema";
+import { markPlaceholders } from "../../../lib/legal";
+
+const html = markPlaceholders("src/content/legal/terms.md", await compiledContent(), frontmatter);
+
+const jsonLd = [
+  breadcrumbs([
+    { name: "Sentio POS", path: "/pos/" },
+    { name: "Terms & Conditions", path: "/pos/terms/" },
+  ]),
+];
+---
+
+<PosLayout title="Terms & Conditions — Sentio POS | SentioLogic" description={frontmatter.description} jsonLd={jsonLd}>
+  <LegalDocument
+    title={frontmatter.title}
+    summary={frontmatter.summary}
+    effective={frontmatter.effective}
+    updated={frontmatter.updated}
+    headings={getHeadings()}
+    html={html}
+    related={{ href: "/pos/privacy/", label: "Privacy Policy" }}
+  />
+</PosLayout>

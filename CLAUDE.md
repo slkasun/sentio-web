@@ -12,12 +12,16 @@ Corporate website for **sentioLogic**, a software engineering company, plus the 
   - `index.astro` — company home (Hero, Sentio POS teaser, Services, Industries, About, Approach, Contact CTA)
   - `contact/index.astro` — enquiry form (Formspree + reCAPTCHA). `?topic=pos-demo` pre-selects the Sentio POS demo topic
   - `pos/index.astro`, `pos/terminal/index.astro`, `pos/admin/index.astro` — Sentio POS module
+  - `pos/privacy/index.astro`, `pos/terms/index.astro` — Sentio POS Privacy Policy and Terms & Conditions, rendered from `src/content/legal/*.md` (linked from the POS footer)
+  - `sitemap.xml.ts` — flat `/sitemap.xml` of every page except the 404
   - `404.astro`
 - `src/layouts/` — `BaseLayout` (document head, SEO, fonts) → `SiteLayout` (company shell) / `PosLayout` (POS brandbar, product nav, dialogs)
 - `src/components/` — `Seo.astro` (title/description/canonical/OG/JSON-LD), company header/footer, `pos/*` (header, footer, `Screen` lightbox figure, `DemoLink`, `DemoCta`, dialogs)
 - `src/data/schema.ts` — shared JSON-LD (Organization, SoftwareApplication, breadcrumbs)
+- `src/content/legal/` — legal Markdown (frontmatter: title, description, summary, effective, updated). Edit these to change the policy text
+- `src/lib/legal.ts` — placeholder guard: any `[bracketed]` text left in the legal Markdown shows as a "To be confirmed" marker in dev, and **fails `npm run build`** so drafts can't be released. `ALLOW_LEGAL_PLACEHOLDERS=1 npm run build` builds a preview anyway
 - `src/scripts/form-handler.js` — contact form: validation, reCAPTCHA v3 token, AJAX POST to Formspree, topic pre-select
-- `src/scripts/product.js` — POS mobile menu, screenshot lightbox, demo dialog (demo CTAs are real links to `/contact/?topic=pos-demo`, so they work without JS)
+- `src/scripts/product.js` — POS mobile menu, screenshot lightbox, demo dialog, legal contents list (demo CTAs are real links to `/contact/?topic=pos-demo`, so they work without JS)
 - `src/styles/` — `tokens.css` (fonts + `:root` tokens), `site.css` (company), `product.css` (POS), `cta.css` (shared button typography). `company.css` / `pos.css` are the layout entry files; they import `cta.css` **last** on purpose so its `.btn` rules override the page styles
 - `public/` — static files (copied to `dist/` as-is): `assets/` (logos, WebP product screenshots, subset WOFF2 fonts, OG image), `favicon/`, `robots.txt`, `site.webmanifest`
 - Brand masters (official files): `public/assets/logo-primary.svg`, `public/assets/logo-primary.png` (2025×500), `public/favicon/favicon.svg` (= `public/assets/symbol.svg`). The favicon PNGs/`.ico` and `og-image.png` are derived from them with sharp

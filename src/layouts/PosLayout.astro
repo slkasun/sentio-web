@@ -9,7 +9,7 @@ import PosDialogs from "../components/pos/PosDialogs.astro";
 import "../styles/pos.css";
 
 type Props = import("astro/types").ComponentProps<typeof BaseLayout> & {
-  current: import("astro/types").ComponentProps<typeof PosHeader>["current"];
+  current?: import("astro/types").ComponentProps<typeof PosHeader>["current"];
 };
 
 const { current, ...seo } = Astro.props;

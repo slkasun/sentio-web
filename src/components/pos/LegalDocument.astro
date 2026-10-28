@@ -1,0 +1,76 @@
+---
+/**
+ * Sentio POS legal page body (Privacy Policy, Terms & Conditions): hero, contents list and the
+ * rendered Markdown. Unfilled "[placeholder]" fields show as "To be confirmed" markers.
+ */
+import type { MarkdownHeading } from "astro";
+import { isPlaceholder, placeholderLabel } from "../../lib/legal";
+
+interface Props {
+  title: string;
+  summary: string;
+  effective: string;
+  updated: string;
+  headings: MarkdownHeading[];
+  html: string;
+  related: { href: string; label: string };
+}
+
+const { title, summary, effective, updated, headings, html, related } = Astro.props;
+const sections = headings.filter((h) => h.depth === 2);
+const dates = [
+  { label: "Effective date", value: effective },
+  { label: "Last updated", value: updated },
+];
+---
+
+<section class="hero detail-hero legal-hero dark">
+  <div class="wrap">
+    <div class="crumb"><a href="/pos/">Sentio POS</a> / <span aria-current="page">{title}</span></div>
+    <div class="eyebrow">Legal · Sentio POS</div>
+    <h1>{title}</h1>
+    <p>{summary}</p>
+    <dl class="legal-dates">
+      {
+        dates.map((d) => (
+          <div>
+            <dt>{d.label}</dt>
+            <dd>
+              {isPlaceholder(d.value) ? (
+                <mark class="tbc">
+                  <b>To be confirmed:</b> {placeholderLabel(d.value)}
+                </mark>
+              ) : (
+                d.value
+              )}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<section class="section wrap legal-layout">
+  <div class="legal-toc" role="navigation" aria-label={`${title} contents`}>
+    <details>
+      <summary>Contents</summary>
+      <ol>
+        {sections.map((h) => <li><a href={`#${h.slug}`}>{h.text.replace(/^\d+\.\s*/, "")}</a></li>)}
+      </ol>
+    </details>
+  </div>
+  <div>
+    <article class="legal" set:html={html} />
+    <aside class="legal-next">
+      <div>
+        <div class="eyebrow">Also read</div>
+        <a class="link" href={related.href}>{related.label} ↗</a>
+      </div>
+      <div>
+        <div class="eyebrow">Questions?</div>
+        <a class="link" href="/contact/">Contact SentioLogic ↗</a>
+      </div>
+    </aside>
+  </div>
+</section>

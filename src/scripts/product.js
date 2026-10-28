@@ -39,3 +39,14 @@ document.querySelectorAll("dialog").forEach((d) =>
     if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) d.close();
   })
 );
+
+// Legal pages: the contents list is a collapsed disclosure on mobile and an open sidebar on wider screens.
+const toc = document.querySelector(".legal-toc details");
+if (toc) {
+  const wide = matchMedia("(min-width: 761px)");
+  const sync = () => (toc.open = wide.matches);
+  sync();
+  wide.addEventListener("change", sync);
+  // Keep the sidebar open on wide screens (keyboard or scripted clicks would otherwise collapse it)
+  toc.querySelector("summary").addEventListener("click", (e) => wide.matches && e.preventDefault());
+}
