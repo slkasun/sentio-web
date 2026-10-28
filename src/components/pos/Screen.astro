@@ -1,0 +1,39 @@
+---
+/**
+ * Product screenshot that opens in the lightbox when selected.
+ */
+interface Props {
+  src: string;
+  title: string;
+  width: number;
+  height: number;
+  class?: string;
+  caption?: string;
+  eager?: boolean;
+}
+
+const {
+  src,
+  title,
+  width,
+  height,
+  class: className = "",
+  caption = "Product design preview · Sample data · Select the screen to enlarge",
+  eager = false,
+} = Astro.props;
+---
+
+<figure class:list={["screen", className]}>
+  <button class="screen-button" data-screen={src} data-title={title} aria-label={`Enlarge ${title}`}>
+    <img
+      width={width}
+      height={height}
+      src={src}
+      alt={title}
+      loading={eager ? "eager" : "lazy"}
+      decoding="async"
+      fetchpriority={eager ? "high" : undefined}
+    />
+  </button>
+  <figcaption>{caption}</figcaption>
+</figure>

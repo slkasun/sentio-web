@@ -1,0 +1,13 @@
+---
+/**
+ * "Request a Demo" CTA. A real link to the enquiry form, so it works without JS and is crawlable;
+ * product.js intercepts it to show the demo dialog first.
+ */
+interface Props {
+  variant?: "" | "white";
+}
+
+const { variant = "" } = Astro.props;
+---
+
+<a class:list={["btn", variant]} href="/contact/?topic=pos-demo" data-demo>Request a Demo <span aria-hidden="true">↗</span></a>

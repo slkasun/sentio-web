@@ -1,0 +1,34 @@
+---
+/**
+ * Sentio POS brandbar (link back to the company site) and product navigation.
+ */
+import DemoLink from "./DemoLink.astro";
+
+interface Props {
+  current: "overview" | "terminal" | "admin";
+}
+
+const { current } = Astro.props;
+const links = [
+  { id: "overview", href: "/pos/", label: "Overview" },
+  { id: "terminal", href: "/pos/terminal/", label: "POS Terminal" },
+  { id: "admin", href: "/pos/admin/", label: "Web Admin Portal" },
+];
+---
+
+<div class="brandbar">
+  <div class="wrap">
+    <a href="/" aria-label="SentioLogic company website"><img src="/assets/logo-primary.svg" alt="sentioLogic" width="110" height="27" /></a>
+    <span>A product by SentioLogic &nbsp; / &nbsp; <a href="/">Company ↗</a></span>
+  </div>
+</div>
+<header class="nav-shell">
+  <div class="wrap nav">
+    <a class="product-logo" href="/pos/"><img src="/assets/symbol.svg" alt="" width="35" height="42" />Sentio <span>POS</span></a>
+    <button class="menu" aria-controls="product-nav" aria-expanded="false">Menu</button>
+    <nav id="product-nav" aria-label="Product navigation">
+      {links.map((l) => <a href={l.href} aria-current={l.id === current ? "page" : undefined}>{l.label}</a>)}
+      <DemoLink />
+    </nav>
+  </div>
+</header>

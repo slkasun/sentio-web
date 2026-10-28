@@ -1,0 +1,10 @@
+// Cloudflare Workers static-assets deploy: `npm run build` writes dist/, `npx wrangler deploy` uploads it.
+{
+  "name": "sentio-website",
+  "compatibility_date": "2026-10-19",
+  "assets": {
+    "directory": "./dist",
+    // Serve dist/404.html with a 404 status for unknown URLs
+    "not_found_handling": "404-page"
+  }
+}

@@ -1,0 +1,31 @@
+---
+/**
+ * Screenshot lightbox and demo-enquiry dialogs used across the Sentio POS pages.
+ */
+---
+
+<dialog id="screen-dialog" aria-labelledby="screen-title">
+  <div class="dialog-top">
+    <strong id="screen-title">Product preview</strong>
+    <button class="close" aria-label="Close screen preview">Close ×</button>
+  </div>
+  <div class="dialog-scroll"><img alt="" /></div>
+</dialog>
+<dialog class="demo-dialog" id="demo-dialog" aria-labelledby="demo-title">
+  <div class="dialog-top">
+    <span>SENTIO POS / PRODUCT DEMO</span>
+    <button class="close" aria-label="Close demo enquiry">Close ×</button>
+  </div>
+  <div class="demo-content">
+    <div class="eyebrow">Let’s talk about your business</div>
+    <h2 id="demo-title">A demo built around your workflow.</h2>
+    <p>Send us a short enquiry with <strong>Sentio POS demo</strong> selected, and tell us:</p>
+    <ul>
+      <li>Your business type and number of outlets</li>
+      <li>Whether you run dine-in, takeaway, or both</li>
+      <li>What you would like to see in the terminal and Admin Portal</li>
+    </ul>
+    <a class="btn" href="/contact/?topic=pos-demo">Continue to Enquiry <span aria-hidden="true">↗</span></a>
+    <p style="font-size:11px">Opens the SentioLogic enquiry form. Nothing is submitted until you send it.</p>
+  </div>
+</dialog>

@@ -1,0 +1,7 @@
+/* Shared CTA typography for company and product pages. */
+.btn,.text-link,.link,.menu,.close{font-family:"CTA Sans",Arial,sans-serif;font-weight:700;font-size:15px;font-style:normal;line-height:1.25;letter-spacing:.01em;text-transform:none;font-synthesis:none}
+.btn{justify-content:center;gap:18px;min-height:52px;padding:15px 24px;white-space:nowrap;text-align:center}
+.btn>span[aria-hidden="true"]{font-family:Arial,sans-serif;font-size:18px;font-weight:400;line-height:1;flex-shrink:0}
+.text-link,.link{display:inline-flex;align-items:center;min-height:44px;padding:10px 0;text-decoration-thickness:1px;text-underline-offset:5px}
+.menu,.close{font-size:14px;min-height:44px}
+@media(max-width:740px){.actions{flex-wrap:wrap;gap:14px 24px}.btn{padding:15px 22px;gap:16px;max-width:100%}.links .btn,#product-nav .btn{justify-content:center}.text-link,.link{font-size:15px}}

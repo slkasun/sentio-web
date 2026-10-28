@@ -1,0 +1,3 @@
+/* Sentio POS entry: product styles, then shared CTA typography (must load last). */
+@import "./product.css";
+@import "./cta.css";

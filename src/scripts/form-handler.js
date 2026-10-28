@@ -11,7 +11,26 @@
   if (!form) return;
 
   const submitBtn = form.querySelector('button[type="submit"]');
-  const btnOriginalText = submitBtn.textContent;
+  const btnOriginalHTML = submitBtn.innerHTML;
+
+  /* ---- Topic: pre-select from ?topic=pos-demo and adapt the message prompt ---- */
+  const topic = form.querySelector("#topic");
+  const messageField = form.querySelector("#message");
+  const defaultPlaceholder = messageField.placeholder;
+  const POS_DEMO = "Sentio POS demo";
+
+  function syncPlaceholder() {
+    messageField.placeholder =
+      topic.value === POS_DEMO
+        ? "Your business type and number of outlets, whether you run dine-in, takeaway or both, and what you would like to see in the terminal and Admin Portal…"
+        : defaultPlaceholder;
+  }
+
+  if (new URLSearchParams(window.location.search).get("topic") === "pos-demo") {
+    topic.value = POS_DEMO;
+  }
+  syncPlaceholder();
+  topic.addEventListener("change", syncPlaceholder);
 
   /* ---- Create status message element ---- */
   const status = document.createElement("div");
@@ -34,7 +53,8 @@
 
   function setLoading(loading) {
     submitBtn.disabled = loading;
-    submitBtn.textContent = loading ? "Sending…" : btnOriginalText;
+    if (loading) submitBtn.textContent = "Sending…";
+    else submitBtn.innerHTML = btnOriginalHTML;
   }
 
   function isValidEmail(email) {
@@ -71,6 +91,12 @@
     hideStatus();
 
     if (!validate()) return;
+
+    // reCAPTCHA loads async; it may be missing on a slow or blocked connection
+    if (typeof grecaptcha === "undefined") {
+      showStatus("Spam protection is still loading. Please try again in a moment.", "error");
+      return;
+    }
 
     setLoading(true);
 

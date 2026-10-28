@@ -1,0 +1,106 @@
+---
+import PosLayout from "../../../layouts/PosLayout.astro";
+import Screen from "../../../components/pos/Screen.astro";
+import DemoLink from "../../../components/pos/DemoLink.astro";
+import DemoCta from "../../../components/pos/DemoCta.astro";
+import { posSoftwareApplication, breadcrumbs } from "../../../data/schema";
+
+const facts = [
+  ["Users & roles", "Manage user access and permissions, including controls for sensitive actions and discounts."],
+  ["Outlet configuration", "Set up outlet details, billing identity, taxes and service charges."],
+  ["Floors & tables", "Configure floors, dining tables and private rooms for the terminal."],
+  ["Printers & displays", "Manage printer and receipt settings, plus customer-display branding."],
+  ["Employee management", "Create steward records and assign them to outlets separately from POS login users."],
+  ["Reservations", "Review reservation records and statuses in list and calendar views."],
+];
+
+const jsonLd = [
+  posSoftwareApplication,
+  breadcrumbs([
+    { name: "Sentio POS", path: "/pos/" },
+    { name: "Web Admin Portal", path: "/pos/admin/" },
+  ]),
+];
+---
+
+<PosLayout
+  current="admin"
+  title="Sentio POS Web Admin Portal — Manage your operation | SentioLogic"
+  description="Explore the Sentio POS Web Admin Portal for products, outlets, permissions, reservations and sales reporting."
+  jsonLd={jsonLd}
+>
+  <section class="hero detail-hero dark">
+    <div class="wrap">
+      <div class="crumb"><a href="/pos/">Sentio POS</a> / <span aria-current="page">Web Admin Portal</span></div>
+      <div class="eyebrow">For the people managing the business</div>
+      <h1>Behind every good service,<br /><em>a clearer view.</em></h1>
+      <p>Organise your products, manage outlet settings and review sales from the Sentio POS Web Admin Portal.</p>
+      <div class="actions">
+        <DemoLink variant="white" />
+        <a class="link" href="/pos/terminal/">Meet the POS Terminal ↗</a>
+      </div>
+      <div class="subnav"><a href="#products">Products</a><a href="#reports">Reporting</a><a href="#controls">Management Controls</a></div>
+      <Screen
+        class="wide-shot portal"
+        src="/assets/admin-dashboard.webp"
+        title="Web Admin Portal dashboard"
+        width={1226}
+        height={1440}
+        caption="Dashboard design preview · Sample figures are illustrative · Select the screen to enlarge"
+        eager
+      />
+    </div>
+  </section>
+
+  <section class="section wrap" id="products">
+    <div class="split">
+      <div class="copy">
+        <div class="eyebrow">01 / Product management</div>
+        <h2>Your menu.<br />Organised for your outlets.</h2>
+        <p>Manage the product catalogue behind the terminal. Group products into categories and control availability by outlet.</p>
+        <ul class="list">
+          <li>Products and category management</li>
+          <li>Product availability filtered by outlet</li>
+          <li>Modifier configuration</li>
+          <li>Bulk price-update workflows</li>
+        </ul>
+      </div>
+      <Screen src="/assets/admin-categories.webp" title="Product categories and outlet-filtered product list" width={1440} height={1024} />
+    </div>
+  </section>
+
+  <section class="section tint" id="reports">
+    <div class="wrap split reverse">
+      <div class="copy">
+        <div class="eyebrow">02 / Reporting</div>
+        <h2>From a wider view<br />to the detail you need.</h2>
+        <p>
+          Review sales summaries and explore bill and product reports. Use outlet and date filters to focus the view, then
+          export reports for further review.
+        </p>
+        <ul class="list">
+          <li>Dashboard sales and payment summaries</li>
+          <li>Sales reporting by outlet</li>
+          <li>Bill details and product reports</li>
+          <li>CSV and PNG report exports</li>
+        </ul>
+      </div>
+      <Screen src="/assets/admin-report.webp" title="Sales Summary Report with outlet grouping" width={1440} height={1024} />
+    </div>
+  </section>
+
+  <section class="section wrap" id="controls">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">03 / Management controls</div>
+        <h2>The right settings.<br />In the right hands.</h2>
+      </div>
+      <p>Give your team a consistent setup, with the controls that support how each outlet operates.</p>
+    </div>
+    <div class="facts">
+      {facts.map(([h, p]) => <article><h3>{h}</h3><p>{p}</p></article>)}
+    </div>
+  </section>
+
+  <DemoCta />
+</PosLayout>

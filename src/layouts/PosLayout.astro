@@ -1,0 +1,27 @@
+---
+/**
+ * Sentio POS module layout: product shell that keeps a link back to the company site.
+ */
+import BaseLayout from "./BaseLayout.astro";
+import PosHeader from "../components/pos/PosHeader.astro";
+import PosFooter from "../components/pos/PosFooter.astro";
+import PosDialogs from "../components/pos/PosDialogs.astro";
+import "../styles/pos.css";
+
+type Props = import("astro/types").ComponentProps<typeof BaseLayout> & {
+  current: import("astro/types").ComponentProps<typeof PosHeader>["current"];
+};
+
+const { current, ...seo } = Astro.props;
+---
+
+<BaseLayout {...seo}>
+  <PosHeader current={current} />
+  <main id="main">
+    <slot />
+  </main>
+  <PosFooter />
+  <PosDialogs />
+</BaseLayout>
+
+<script src="../scripts/product.js"></script>

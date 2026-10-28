@@ -1,0 +1,183 @@
+---
+import PosLayout from "../../layouts/PosLayout.astro";
+import Screen from "../../components/pos/Screen.astro";
+import DemoLink from "../../components/pos/DemoLink.astro";
+import DemoCta from "../../components/pos/DemoCta.astro";
+import { posSoftwareApplication } from "../../data/schema";
+
+const faqs = [
+  {
+    q: "Are the POS and Admin Portal separate products?",
+    a: "No. They are two parts of Sentio POS: the terminal is for day-to-day service, while the Web Admin Portal handles administration and reporting.",
+  },
+  {
+    q: "Can I manage more than one outlet?",
+    a: "The Admin Portal includes outlet settings, product availability by outlet and outlet-based reporting. We can walk through your outlet structure during a demo.",
+  },
+  {
+    q: "How much does Sentio POS cost?",
+    a: "Contact SentioLogic to discuss pricing, setup and the configuration your business needs. We have not published fixed plans on this site.",
+  },
+  {
+    q: "What about delivery, loyalty and split bills?",
+    a: "These belong to the product roadmap and are not presented as part of the current core offering here. Ask us about their availability and planned rollout.",
+  },
+  {
+    q: "Can we use our existing hardware?",
+    a: "Share your terminal, printer and customer-display models when you enquire. We will discuss compatibility and setup requirements for your environment.",
+  },
+];
+
+const jsonLd = [
+  posSoftwareApplication,
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+];
+---
+
+<PosLayout
+  current="overview"
+  title="Sentio POS — Restaurant operations, connected | SentioLogic"
+  description="Discover Sentio POS: a restaurant terminal and Web Admin Portal for dine-in, takeaway, billing, outlet management and reporting."
+  jsonLd={jsonLd}
+>
+  <section class="hero dark">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Restaurant POS + Web Admin Portal</div>
+        <h1>Every order.<br />Every outlet.<br /><em>One clearer view.</em></h1>
+        <p>
+          Bring front-of-house service and back-office control together. Sentio POS helps your team take orders, settle
+          bills and manage the details behind a well-run restaurant.
+        </p>
+        <div class="actions">
+          <DemoLink variant="white" />
+          <a href="#explore" class="link">Explore the Product ↓</a>
+        </div>
+        <p class="mini-note">Built for dine-in and takeaway operations.</p>
+      </div>
+      <Screen class="hero-shot" src="/assets/pos-billing.webp" title="Sentio POS order and billing screen" width={1280} height={800} eager />
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <span>Dine-in & takeaway</span><span>Payments & billing</span><span>Reservations & advances</span><span>Outlet administration</span>
+    </div>
+  </div>
+
+  <section class="section wrap" id="explore">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">One product. Two working environments.</div>
+        <h2>On the floor.<br />Behind the business.</h2>
+      </div>
+      <p>
+        The terminal supports the pace of service. The web portal puts product setup, outlet controls and reporting in the
+        hands of the people managing the business.
+      </p>
+    </div>
+    <div class="product-pair">
+      <article class="product-card">
+        <span class="eyebrow">01 / For your service team</span>
+        <h3>POS Terminal</h3>
+        <p>From the first order to the final bill, keep the next action within reach.</p>
+        <div class="screen card-image">
+          <img width="1280" height="800" src="/assets/pos-billing.webp" alt="Sentio POS billing interface" loading="lazy" decoding="async" />
+        </div>
+        <a class="link" href="/pos/terminal/">Explore the POS Terminal ↗</a>
+      </article>
+      <article class="product-card">
+        <span class="eyebrow">02 / For your management team</span>
+        <h3>Web Admin Portal</h3>
+        <p>Organise your products, configure outlets and review the numbers.</p>
+        <div class="screen card-image">
+          <img width="1226" height="1440" src="/assets/admin-dashboard.webp" alt="Sentio POS Admin Portal dashboard" loading="lazy" decoding="async" />
+        </div>
+        <a class="link" href="/pos/admin/">Explore the Admin Portal ↗</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="wrap split">
+      <div class="copy">
+        <div class="eyebrow">A service flow that makes sense</div>
+        <h2>From table to payment,<br />keep the details together.</h2>
+        <p>
+          Work with dine-in tables and takeaway orders in a purpose-built terminal. Keep customer details, order items and
+          settlement close to the task at hand.
+        </p>
+        <ul class="list">
+          <li>Navigate floors, tables and private rooms</li>
+          <li>Manage order items, quantities and discounts</li>
+          <li>Handle kitchen tickets and printed bills</li>
+        </ul>
+        <a class="link" href="/pos/terminal/">See the Service Workflow ↗</a>
+      </div>
+      <Screen src="/assets/pos-orders.webp" title="Dine-in table and floor overview" width={1280} height={800} />
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="split reverse">
+      <div class="copy">
+        <div class="eyebrow">A clearer view of the business</div>
+        <h2>The detail behind<br />every trading day.</h2>
+        <p>
+          Use the Admin Portal to organise products, manage access and review sales across outlets. Go from an overview to
+          the report you need.
+        </p>
+        <ul class="list">
+          <li>Product categories and outlet availability</li>
+          <li>Sales summaries and report exports</li>
+          <li>User roles and outlet settings</li>
+        </ul>
+        <a class="link" href="/pos/admin/">See the Management Tools ↗</a>
+      </div>
+      <Screen src="/assets/admin-report.webp" title="Sales Summary Report by outlet" width={1440} height={1024} />
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">From setup to close</div>
+          <h2>A connected working day.</h2>
+        </div>
+        <p>Two interfaces, organised around the responsibilities of your team.</p>
+      </div>
+      <div class="steps">
+        <article><b>01 / PREPARE</b><h3>Set up the essentials.</h3><p>Products, categories, outlets, permissions and printers.</p></article>
+        <article><b>02 / SERVE</b><h3>Keep orders moving.</h3><p>Dine-in tables, takeaway orders and kitchen tickets.</p></article>
+        <article><b>03 / SETTLE</b><h3>Finish the transaction.</h3><p>Payment methods, discounts, advances and receipts.</p></article>
+        <article><b>04 / REVIEW</b><h3>Understand the day.</h3><p>Shift closing, day-end workflows and sales reports.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="faq">
+      <div class="eyebrow">A few useful answers</div>
+      <h2>Before we show you around.</h2>
+      {
+        faqs.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+
+  <DemoCta />
+</PosLayout>

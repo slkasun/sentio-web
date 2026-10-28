@@ -1,0 +1,111 @@
+---
+import PosLayout from "../../../layouts/PosLayout.astro";
+import Screen from "../../../components/pos/Screen.astro";
+import DemoLink from "../../../components/pos/DemoLink.astro";
+import DemoCta from "../../../components/pos/DemoCta.astro";
+import { posSoftwareApplication, breadcrumbs } from "../../../data/schema";
+
+const facts = [
+  ["Reservations & advances", "Capture guest details, party size and table or room preferences. Record advances against the reservation."],
+  ["Kitchen & print workflows", "Send kitchen tickets, print bills and access copy-print workflows. Manage printer assignments for the terminal."],
+  ["Shift & day-end", "Work through opening and closing floats, shift summaries and day-end reporting."],
+  ["Customer details", "Attach a customer to an order and keep the information needed for service together."],
+  ["Customer display", "Show the order and total on a customer-facing screen, with outlet branding."],
+  ["Controlled cancellations", "Use cancellation and approval workflows with corresponding bill and kitchen-ticket printouts."],
+];
+
+const jsonLd = [
+  posSoftwareApplication,
+  breadcrumbs([
+    { name: "Sentio POS", path: "/pos/" },
+    { name: "POS Terminal", path: "/pos/terminal/" },
+  ]),
+];
+---
+
+<PosLayout
+  current="terminal"
+  title="Sentio POS Terminal — From order to payment | SentioLogic"
+  description="Explore Sentio POS terminal workflows for restaurant orders, tables, payments, reservations, printing and shift closing."
+  jsonLd={jsonLd}
+>
+  <section class="hero detail-hero dark">
+    <div class="wrap">
+      <div class="crumb"><a href="/pos/">Sentio POS</a> / <span aria-current="page">POS Terminal</span></div>
+      <div class="eyebrow">For the people running service</div>
+      <h1>Less switching.<br /><em>More serving.</em></h1>
+      <p>Orders, kitchen tickets and payments in a workspace built for your restaurant’s day-to-day flow.</p>
+      <div class="actions">
+        <DemoLink variant="white" />
+        <a class="link" href="/pos/admin/">Meet the Admin Portal ↗</a>
+      </div>
+      <div class="subnav"><a href="#orders">Orders & Tables</a><a href="#payments">Payments</a><a href="#operations">Daily Operations</a></div>
+      <Screen class="wide-shot" src="/assets/pos-billing.webp" title="POS Terminal billing screen" width={1280} height={800} eager />
+    </div>
+  </section>
+
+  <section class="section wrap" id="orders">
+    <div class="split">
+      <div class="copy">
+        <div class="eyebrow">01 / Orders & tables</div>
+        <h2>A place for every table.<br />A clear path for every order.</h2>
+        <p>
+          Move between floors, tables and private rooms. Keep dine-in and takeaway service organised, with order details
+          close at hand.
+        </p>
+        <ul class="list">
+          <li>Table status and floor navigation</li>
+          <li>Covers and steward selection for dine-in</li>
+          <li>Move a seated group to another table or room</li>
+          <li>Browse products by category and adjust quantities</li>
+        </ul>
+      </div>
+      <Screen src="/assets/pos-orders.webp" title="Floor and table selection" width={1280} height={800} />
+    </div>
+  </section>
+
+  <section class="section tint" id="payments">
+    <div class="wrap split reverse">
+      <div class="copy">
+        <div class="eyebrow">02 / Payments & receipts</div>
+        <h2>Take payment.<br />Keep the numbers clear.</h2>
+        <p>
+          Record payments using the configured methods, combine payment methods on a bill and keep the remaining balance or
+          change visible.
+        </p>
+        <ul class="list">
+          <li>Quick-cash denominations and full-amount entry</li>
+          <li>Multiple payment methods on one bill</li>
+          <li>Discounts with permission controls</li>
+          <li>Printed bills and advance-payment receipts</li>
+        </ul>
+      </div>
+      <Screen
+        src="/assets/pos-payment.webp"
+        title="Payment screen with Visa and cash applied"
+        width={1280}
+        height={800}
+        caption="Design preview · Configurable methods shown; not a claim of gateway integration · Select the screen to enlarge"
+      />
+    </div>
+  </section>
+
+  <section class="section wrap" id="operations">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">03 / Beyond the transaction</div>
+        <h2>The details that keep<br />a shift running.</h2>
+      </div>
+      <p>
+        Service includes more than taking an order. Sentio POS brings the surrounding workflows into the same operational
+        environment.
+      </p>
+    </div>
+    <div class="facts">
+      {facts.map(([h, p]) => <article><h3>{h}</h3><p>{p}</p></article>)}
+    </div>
+    <div class="scope">This page focuses on dine-in and takeaway. Delivery, loyalty and split bills are part of the roadmap.</div>
+  </section>
+
+  <DemoCta />
+</PosLayout>
